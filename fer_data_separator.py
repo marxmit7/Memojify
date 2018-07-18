@@ -9,8 +9,8 @@ with open ('fer2013.csv') as f:
 if not os.path.exists(os.path.dirname("data")):
     try:
         os.mkdir("data")
-    except OSError as ee:
-        raise
+    except OSError:
+        pass
 
 
 trainingData = [row[:-1] for row in rows if row[-1] == 'Training']
