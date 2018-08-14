@@ -17,7 +17,13 @@ aligned_face = FaceAligner(shape_predictor, desiredFaceWidth=256)
 filepath = os.path.dirname(os.path.abspath(__file__))
 
 
-if not os.path.exists("data"):
-    os.mkdir('data')
+if not os.path.exists(filepath+"/data"):
+    os.mkdir(filepath+'/data')
 
 frame_counter = 0
+label = input("enter the label of the image to be captured\n")
+
+if not os.path.exists(filepath+"/data/"+label):
+        os.mkdir(filepath+'/data/'+label)
+
+
