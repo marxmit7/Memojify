@@ -2,7 +2,9 @@
 emojify  me now
 
 
+Install requirements
 
+``` python -r requirements.txt ```
 
 
 ## Files and their usage:
