@@ -7,7 +7,7 @@ emojify  me now
 
 ## Files and their usage:
 
-* get_images_from_webcam.py
+* ```get_images_from_webcam.py```
 
 
     * to create dataset using webcam
