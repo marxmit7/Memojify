@@ -29,7 +29,7 @@ if not os.path.exists(filepath+"/data"):
 	os.mkdir(filepath+'/data')
 if not os.path.exists(img_path):
 	os.mkdir(img_path)
-	
+
 frame_counter = len(os.listdir(img_path))
 
 
