@@ -22,6 +22,6 @@ label = input("enter the label of the image to be captured\n")
 if not os.path.exists(filepath+"/data"):
         os.mkdir(filepath+'/data')
 if not os.path.exists(filepath+"/data/"+label):
-    os.mkdir(filepath+'/data/'+label)
+        os.mkdir(filepath+'/data/'+label)
 
 
