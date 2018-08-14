@@ -3,3 +3,6 @@ fer2013.csv
 testPublic.csv
 train.csv
 *.dat
+__pycache__
+.vscode
+.DStore
