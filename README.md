@@ -29,7 +29,7 @@ Install requirements
 <td>
 <img src="https://avatars0.githubusercontent.com/u/22710677?s=400&u=4968e080c41487c896bde030ac71c7eec82bd406&v=4" width="180"/>
 
-Amit Kumar
+        Amit Kumar
 
 <p align="center">
 <a href = "https://github.com/amit2rockon"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
