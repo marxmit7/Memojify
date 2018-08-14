@@ -45,17 +45,17 @@ for (i, rect) in enumerate(rects):
     (x, y, w, h) = rect_to_bb(rect)
     print(x, y, w, h)
 
-    fname = '{}_{}.{}'.format(name, i, ext)
-    # clone the original image so we can draw on it, then
-    # display the name of the face part on the image
-    clone = image.copy()
-    cv2.rectangle(clone, (x, y), (x + w, y + h), (0, 255, 0), 1)
-    startX = x
-    startY = y - 15 if y - 15 > 15 else y + 15
-    cv2.putText(clone, str(i), (startX, startY),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-    roi = image[y:y + h, x:x + w]
-    cv2.imshow("ROI", roi)
-    cv2.imwrite(fname, roi)
-    cv2.imshow("Image", clone)
-    cv2.waitKey(0)
+    # fname = '{}_{}.{}'.format(name, i, ext)
+    # # clone the original image so we can draw on it, then
+    # # display the name of the face part on the image
+    # clone = image.copy()
+    # cv2.rectangle(clone, (x, y), (x + w, y + h), (0, 255, 0), 1)
+    # startX = x
+    # startY = y - 15 if y - 15 > 15 else y + 15
+    # cv2.putText(clone, str(i), (startX, startY),
+    #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+    # roi = image[y:y + h, x:x + w]
+    # cv2.imshow("ROI", roi)
+    # cv2.imwrite(fname, roi)
+    # cv2.imshow("Image", clone)
+    # cv2.waitKey(0)

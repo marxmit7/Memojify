@@ -3,8 +3,14 @@ import cv2
 import numpy as np
 import dlib
 import os
+import imutils
 from imutils import face_utils
 from imutils.face_utils import FaceAligner
+
+
+
+filepath = os.path.dirname(os.path.abspath(__file__))
+
 
 ap = argparse.ArgumentParser()
 ap.add_argument( "-l","--label", required=True, help="label of the image to be captured")
@@ -17,7 +23,6 @@ detector = dlib.get_frontal_face_detector()
 
 
 aligned_face = FaceAligner(shape_predictor, desiredFaceWidth=256)
-filepath = os.path.dirname(os.path.abspath(__file__))
 
 frame_counter = 0
 img_path = filepath+'/data/'+label
@@ -37,24 +42,39 @@ x,y,w,h = 40,50,30,40
 while True:
 	ret_val , img = vcam.read()
 	gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-	faces = detector(gray_img)
+	gray_faces = detector(gray_img)
+	# faces = detector(gray_img)
+	# cv2.rectangle(img, (x, y), (x+w, y+h), (255, 155, 177), 1)
+	# cv2.imshow('img', img)
 
-	cv2.rectangle(img, (x, y), (x+w, y+h), (255, 155, 177), 2)
+
+	face = gray_faces[0]
+	shape_68 = shape_predictor(img,face)
+	shape = face_utils.shape_to_np(shape_68)
+	(x,y,w,h) = face_utils.rect_to_bb(face)
+
+	cv2.rectangle(img, (x-10, y-20), (x+w+20, y+h+10), (255, 0, 0), 1)
 	cv2.imshow('img', img)
 
-	cv2.imshow('gray_img',gray_img)
+	# cv2.imshow('gray_img',gray_img)
 	keypress = cv2.waitKey(1)
+
+
+
 	if keypress%256 == 27:
 		print("Escape is pressed, quiting...")
 		break
 	elif keypress%256 == 32:
-		if len(faces)>0:
-			face = faces[0]
-			shape_68 = shape_predictor(img,face)
-			shape = face_utils.shape_to_np(shape_68)
 
+		# if len(gray_faces)>0:
 
+			# face = gray_faces[0]
+			# shape_68 = shape_predictor(img,face)
+			# shape = face_utils.shape_to_np(shape_68)
+			# (x,y,w,h) = face_utils.rect_to_bb(face)
 
+			# cv2.rectangle(img, (x, y), (x+w, y+h), (255, 155, 177), 1)
+			# cv2.imshow('img', img)
 
 		img_name = "{}.png".format(frame_counter)
 		cv2.imwrite(img_path+"/"+ img_name, img)
