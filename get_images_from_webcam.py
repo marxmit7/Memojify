@@ -22,13 +22,15 @@ detector = dlib.get_frontal_face_detector()
 
 fa = FaceAligner(shape_predictor, desiredFaceWidth=256)
 
-frame_counter = 0
 img_path = filepath+'/data/'+label
+
 
 if not os.path.exists(filepath+"/data"):
 	os.mkdir(filepath+'/data')
 if not os.path.exists(img_path):
 	os.mkdir(img_path)
+	
+frame_counter = len(os.listdir(img_path))
 
 
 vcam = cv2.VideoCapture(0)
@@ -46,14 +48,12 @@ while True:
 	shape_68 = shape_predictor(img,face)
 	shape = face_utils.shape_to_np(shape_68)
 	(x,y,w,h) = face_utils.rect_to_bb(face)
-	# x0,y0,x1,y1 =
 	clone = img.copy()
 	cv2.rectangle(clone, (x-15, y-20), (x+w+20, y+h+10), (255, 0, 0), 1)
 	only_face = imutils.resize(img[y-20:y+h+10,x-15:x+w+20],width=150)
 
 	faceAligned = fa.align(img, gray_img, face)
 
-	# cv2.imshow('face',only_face)
 	cv2.imshow('aligned',faceAligned)
 	cv2.imshow('img', clone)
 	keypress = cv2.waitKey(1)
@@ -63,7 +63,6 @@ while True:
 		break
 	elif keypress%256 == 32:
 		img_name = "{}.png".format(frame_counter)
-		# cv2.imwrite(img_path+"/"+ img_name, img)
 		cv2.imwrite(img_path+"/"+ img_name, faceAligned)
 		print("{} captured ".format(img_name))
 		frame_counter += 1
