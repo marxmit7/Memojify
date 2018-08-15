@@ -14,15 +14,17 @@ def images_labels(data_path):
     labels = []
     image_label=[]
     print("preparing all images as numpy arrays ...\n")
+    category = 0
     for folder in os.listdir(data_path):
         if not folder.startswith('.'):
             file_path = data_path+'/'+folder
 
             for image in os.listdir(file_path):
                 img = cv2.imread(file_path+'/'+image,0)
-                image_label.append((np.array(img,dtype = np.float16),str(folder)))
+                image_label.append((np.array(img,dtype = np.float16),int(category)))
 
             shuffle_me= shuffle(shuffle(shuffle(image_label)))
+            category +=1
 
     return shuffle_me
 
@@ -48,7 +50,7 @@ def get_data():
     test_images , test_labels = img_lab(testing_data)
     val_images , val_labels = img_lab(validation_data)
 
-    print(len(train_images),len(train_labels),len(test_images),len(test_labels),len(val_images),len(val_labels))
+    print(" total image available     ",len(prepared_data),"\n no of training images:    ",len(train_images),"\n no of test images:        ",len(test_images),"\n no of validation images:  ",len(val_images))
 
     return train_images,train_labels,test_images,test_labels,val_images,val_labels
 

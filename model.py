@@ -5,6 +5,7 @@ from keras.layers.core import Activation , Dense , Dropout , Flatten
 from keras import backend as K
 import numpy as np
 import os
+from keras.utils import np_utils
 from keras import optimizers
 from keras.layers import BatchNormalization
 from keras.callbacks import TensorBoard , ModelCheckpoint
@@ -39,11 +40,21 @@ def cnn_model():
 
     return model,callbacks_list
 
-
 def train():
     train_images,train_labels,test_images,test_labels,val_images,val_labels = get_data()
-    print("train function")
-    print(len(train_images))
+    print("train function, type of data",type(train_images))
+
+
+    train_labels = np_utils.to_categorical(train_labels)
+    test_labels = np_utils.to_categorical(test_labels)
+    val_labels = np_utils.to_categorical(val_labels)
+
+    model ,callbacks_list = cnn_model()
+    model.fit(train_images,train_labels,validation_data=(test_images,test_labels),epochs=20,batch_size=100,callbacks=callbacks_list)
+    model = load_model('/model/model_generated.h5')
+    scores = model.evaluate(val_images,val_labels,verbose=1)
+    print("cnn error %0.2f"%(100-scores[1]*100))
+    print(len(train_images),len(test_images))
 
 
 
