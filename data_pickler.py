@@ -29,10 +29,6 @@ def images_labels(data_path):
     return images,labels
 
 
-images ,labels = images_labels(dataset_path)
-
-for image,label in zip(images,labels):
-    print(image,label)
 
 
 
