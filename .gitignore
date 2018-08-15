@@ -2,6 +2,7 @@ testPrivate.csv
 fer2013.csv
 testPublic.csv
 train.csv
+*.png
 *.dat
 __pycache__
 .vscode

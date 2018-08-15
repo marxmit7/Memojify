@@ -49,3 +49,14 @@ def get_data(images_labels,img_lab,dataset_path):
 
     return train_images,train_labels,test_images,test_labels,val_images,val_labels
 
+
+def get_no_of_classes(dataset_path):
+    data_dir =[]
+    for folder in os.listdir(dataset_path):
+        if not folder.startswith('.'):
+            data_dir.append(folder)
+    return data_dir
+
+def get_image_size(dataset_path):
+	img = cv2.imread(dataset_path+'/smile/0.png', 0)
+	return img.shape
