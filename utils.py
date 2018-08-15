@@ -10,8 +10,6 @@ if not os.path.exists("model"):
     os.mkdir("model")
 
 def images_labels(data_path):
-    images = []
-    labels = []
     image_label=[]
     print("preparing all images as numpy arrays ...\n")
     category = 0
@@ -33,6 +31,7 @@ def img_lab(data_array):
     images=[]
     labels =[]
     for (image,label) in data_array:
+        image = image.reshape((image.shape[0],image.shape[1],1))
         images.append(image)
         labels.append(label)
     return images,labels
@@ -60,7 +59,7 @@ def get_no_of_classes(dataset_path):
     for folder in os.listdir(dataset_path):
         if not folder.startswith('.'):
             data_dir.append(folder)
-    return data_dir
+    return int(len(data_dir))
 
 def get_image_size(dataset_path):
 	img = cv2.imread(dataset_path+'/smile/0.png', 0)
