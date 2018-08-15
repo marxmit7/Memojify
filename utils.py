@@ -6,6 +6,9 @@ import numpy as np
 
 dataset_path = os.path.dirname(os.path.abspath(__file__))+'/data'
 
+if not os.path.exists("model"):
+    os.mkdir("model")
+
 def images_labels(data_path):
     images = []
     labels = []
@@ -33,7 +36,7 @@ def img_lab(data_array):
     return images,labels
 
 
-def get_data(images_labels,img_lab,dataset_path):
+def get_data():
 
     prepared_data = images_labels(dataset_path)
 
