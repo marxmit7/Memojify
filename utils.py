@@ -1,5 +1,4 @@
 import os
-import pickle
 import cv2
 import random
 from sklearn.utils import shuffle
@@ -22,24 +21,31 @@ def images_labels(data_path):
 
             shuffle_me= shuffle(shuffle(shuffle(image_label)))
 
-            for image, label in shuffle_me:
-                images.append(image)
-                labels.append(label)
+    return shuffle_me
 
+
+def img_lab(data_array):
+    images=[]
+    labels =[]
+    for (image,label) in data_array:
+        images.append(image)
+        labels.append(label)
     return images,labels
 
 
-def get_data(images,labels):
+def get_data(images_labels,img_lab,dataset_path):
 
-    training_data = []
-    testing_data = []
-    validation_data = []
+    prepared_data = images_labels(dataset_path)
 
+    training_data = prepared_data[:int(4/5*len(prepared_data))]
+    testing_data =  prepared_data[int(4/5*len(prepared_data)):int(9/10*len(prepared_data))]
+    validation_data = prepared_data[int(9/10*len(prepared_data)):]
 
+    train_images , train_labels = img_lab(training_data)
+    test_images , test_labels = img_lab(testing_data)
+    val_images , val_labels = img_lab(validation_data)
 
+    print(len(train_images),len(train_labels),len(test_images),len(test_labels),len(val_images),len(val_labels))
 
-
-
-
-
+    return train_images,train_labels,test_images,test_labels,val_images,val_labels
 
