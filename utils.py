@@ -74,14 +74,38 @@ def get_emojis():
             emojis.append(cv2.imread(emojis_folder+emoji,-1))
     return emojis
 
+
+def blend_transparent(face_img, overlay_t_img):
+    overlay_img = overlay_t_img[:,:,:3]
+    overlay_mask = overlay_t_img[:,:,3:]
+    background_mask = 255 - overlay_mask
+    overlay_mask = cv2.cvtColor(overlay_mask, cv2.COLOR_GRAY2BGR)
+    background_mask = cv2.cvtColor(background_mask, cv2.COLOR_GRAY2BGR)
+    face_part = (face_img * (1 / 255.0)) * (background_mask * (1 / 255.0))
+    overlay_part = (overlay_img * (1 / 255.0)) * (overlay_mask * (1 / 255.0))
+    return np.uint8(cv2.addWeighted(face_part, 255.0, overlay_part, 255.0, 0.0))
+
+def blend(image, emoji, position):
+	x, y, w, h = position
+	emoji = cv2.resize(emoji, (w, h))
+	try:
+		image[y:y+h, x:x+w] = blend_transparent(image[y:y+h, x:x+w], emoji)
+	except:
+		pass
+	return image
+
+
+def keras_process_image(img):
+	input_size = get_image_size(dataset_path)
+
+	img = cv2.resize(img,( input_size[0],input_size[1]))
+	img = np.array(img, dtype=np.float32)
+	img = np.reshape(img, (-1, input_size[0],input_size[1], 1))
+	return img
+
 def keras_predict(model, image):
 	processed = keras_process_image(image)
 	pred = model.predict(processed)
 	pred_probab = pred[0]
 	pred_class = list(pred_probab).index(max(pred_probab))
 	return max(pred_probab), pred_class
-
-
-def blend():
-
-    print("blending")
