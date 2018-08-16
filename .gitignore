@@ -4,6 +4,7 @@ testPublic.csv
 train.csv
 *.png
 *.dat
+*.h5
 __pycache__
 .vscode
 .DStore

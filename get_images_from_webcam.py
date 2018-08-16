@@ -16,7 +16,7 @@ args = vars(ap.parse_args())
 label = args["label"]
 
 
-shape_predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+shape_predictor = dlib.shape_predictor(filepath+"/shape_predictor_68_face_landmarks.dat")
 detector = dlib.get_frontal_face_detector()
 
 
