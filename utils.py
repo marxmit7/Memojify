@@ -64,3 +64,24 @@ def get_no_of_classes(dataset_path):
 def get_image_size(dataset_path):
 	img = cv2.imread(dataset_path+'/smile/0.png', 0)
 	return img.shape
+
+
+def get_emojis():
+    emojis_folder = os.path.dirname(os.path.abspath(__file__))+'/emojis/'
+    emojis =[]
+    for emoji in os.listdir(emojis_folder):
+        if not emoji.startswith('.'):
+            emojis.append(cv2.imread(emojis_folder+emoji,-1))
+    return emojis
+
+def keras_predict(model, image):
+	processed = keras_process_image(image)
+	pred = model.predict(processed)
+	pred_probab = pred[0]
+	pred_class = list(pred_probab).index(max(pred_probab))
+	return max(pred_probab), pred_class
+
+
+def blend():
+
+    print("blending")

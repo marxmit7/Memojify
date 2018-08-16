@@ -5,7 +5,6 @@ from keras.layers.convolutional import Conv2D,MaxPooling2D
 from keras.layers.core import Activation , Dense , Dropout , Flatten
 from keras import backend as K
 import numpy as np
-import os
 from keras.utils import np_utils
 from keras import optimizers
 from keras.layers import BatchNormalization
@@ -15,6 +14,11 @@ from utils import get_data , get_no_of_classes , get_image_size
 import matplotlib.pyplot as plt
 import math
 import h5py as h5py
+
+import os
+K.set_image_dim_ordering('tf')
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import argparse
 ap = argparse.ArgumentParser()
@@ -66,8 +70,6 @@ def train():
     test_images = np.array(test_images)
     val_images = np.array(val_images)
 
-    print("printing the shape: ",train_images[0].shape)
-
     train_labels = np_utils.to_categorical(train_labels)
     test_labels = np_utils.to_categorical(test_labels)
     val_labels = np_utils.to_categorical(val_labels)
@@ -101,8 +103,8 @@ def train():
     plt.title('model loss')
     plt.ylabel('loss')
     plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc = 'upper left')
-    plt.savefig('generated_graph.png')
+    plt.legend(['train', 'test'], loc = 'lower left')
+    plt.savefig('epoch_'+str(epochs)+'_graph.png')
     plt.show()
 
 train()
