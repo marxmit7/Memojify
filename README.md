@@ -12,14 +12,24 @@ Install requirements
 
 ## Files and their usage:
 
-* ```get_images_from_webcam.py```
 
+
+* ``` model.py```
+    * To train the model
+    * outputs the model & weight in model directory
+    * also outputs the graph having the logs of training
+    * arguments -e/--epochs
+        * pass the integer value of epochs
+
+* ```get_images_from_webcam.py```
 
     * to create dataset using webcam
     * It includes face alignment and face detection
     * argparse -l/--label
         * pass the argument like smile/wink/laugh according to your need
 
+* ``` utils.py ```
+    * contains useful required functions
 
 
 

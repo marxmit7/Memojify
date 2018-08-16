@@ -16,19 +16,20 @@ import matplotlib.pyplot as plt
 import math
 import h5py as h5py
 
+import argparse
+ap = argparse.ArgumentParser()
+ap.add_argument( "-e","--epochs", required=True, help="enter the no of epochs")
+args = vars(ap.parse_args())
 
 dataset_path = os.path.dirname(os.path.abspath(__file__))+'/data'
-
 model_path = os.path.dirname(os.path.abspath(__file__))+'/model/keras_model.h5'
 weight_path = os.path.dirname(os.path.abspath(__file__))+'/model/keras_weight.h5'
 
-
 input_size = get_image_size(dataset_path)
 no_classes = get_no_of_classes(dataset_path)
-epochs = 50
 
+epochs = int(args["epochs"])
 batch_size = 32
-
 nb_filters1 = 32
 nb_filters2 = 64
 conv1_size = 3
@@ -101,8 +102,7 @@ def train():
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc = 'upper left')
-    plt.show()
     plt.savefig('generated_graph.png')
-
+    plt.show()
 
 train()
