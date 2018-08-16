@@ -26,7 +26,6 @@ weight_path = os.path.dirname(os.path.abspath(__file__))+'/model/keras_weight.h5
 input_size = get_image_size(dataset_path)
 no_classes = get_no_of_classes(dataset_path)
 epochs = 50
-print(no_classes)
 
 batch_size = 32
 
@@ -39,16 +38,16 @@ pool_size = 2
 
 def cnn_model():
     model = Sequential()
-    model.add(Conv2D(nb_filters1, conv1_size, conv1_size, border_mode ="same", input_shape=(input_size[0], input_size[1], 1)))
-    model.add(Activation("relu"))
-    model.add(MaxPooling2D(pool_size=(pool_size, pool_size)))
+    model.add(Conv2D(nb_filters1, (conv1_size,conv1_size), input_shape=(input_size[0], input_size[1], 1),activation='relu'))
+    model.add(BatchNormalization())
+    model.add(MaxPooling2D(pool_size=(pool_size, pool_size),strides=(2, 2), padding='same'))
 
-    model.add(Conv2D(nb_filters2, conv2_size, conv2_size, border_mode ="same"))
+    model.add(Conv2D(nb_filters2, (conv2_size, conv2_size)))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(pool_size, pool_size)))
 
     model.add(Flatten())
-    model.add(Dense(256))
+    model.add(Dense(1024))
     model.add(Activation("relu"))
     model.add(Dropout(0.5))
     model.add(Dense(no_classes, activation='softmax'))
