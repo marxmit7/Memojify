@@ -23,7 +23,7 @@ Install requirements
 
 * ```get_images_from_webcam.py```
 
-    * to create dataset using webcam
+    * to create dataset using webcam (including all the  required subfolders)
     * It includes face alignment and face detection
     * argparse -l/--label
         * pass the argument like smile/wink/laugh according to your need
