@@ -31,9 +31,31 @@ Install requirements
 * ``` utils.py ```
     * contains useful required functions
 
+* ``` memojifier.py```
+    * It takes the stream of photos and converts the current emotion of the face into animated emoji
+
+Current Network Architecture
+
+<img src = "keras_model.jpg">
+
+Result: with validation accuracy of 80%
+
+
+<img src="result.gif" width="400"/>
 
 
 
+### synopsis:
+
+Currently model is unstable and overfits easily (:funny)
+
+Try to train the model with as many as possible images and different lightening environment
+
+this project is currently in experimental stage and will be worked upon
+
+
+## Contributions:-
+Got some issue? raise an issue and if you have something to contribute then just give a PR.
 
 ## Author
 

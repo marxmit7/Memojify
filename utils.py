@@ -62,7 +62,7 @@ def get_no_of_classes(dataset_path):
     return int(len(data_dir))
 
 def get_image_size(dataset_path):
-	img = cv2.imread(dataset_path+'/smile/0.png', 0)
+	img = cv2.imread(dataset_path+'/laugh/0.png', 0)
 	return img.shape
 
 
