@@ -49,7 +49,7 @@ Result: with validation accuracy of 80%
 
 Currently model is unstable and overfits easily (:funny)
 
-Try to train the model with as many as possible images and different lightening environment
+Try to train the model with as many as possible images and different environment
 
 this project is currently in experimental stage and will be worked upon
 
