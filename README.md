@@ -41,7 +41,7 @@ Current Network Architecture
 Result: with validation accuracy of 80%
 
 
-<img src="result.gif" width="400"/>
+
 
 
 
