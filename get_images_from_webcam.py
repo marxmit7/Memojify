@@ -43,7 +43,7 @@ while True:
 	ret_val , img = vcam.read()
 	gray_img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	gray_faces = detector(gray_img)
-
+	
 	face = gray_faces[0]
 	shape_68 = shape_predictor(img,face)
 	shape = face_utils.shape_to_np(shape_68)
@@ -63,7 +63,7 @@ while True:
 		break
 	elif keypress%256 == 32:
 		img_name = "{}.png".format(frame_counter)
-		cv2.imwrite(img_path+"/"+ img_name, faceAligned)
+		cv2.imwrite(os.path.join(img_path, img_name), faceAligned)
 		print("{} captured ".format(img_name))
 		frame_counter += 1
 
